@@ -1,0 +1,78 @@
+﻿<Window x:Class="WpfObjectDetection.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfObjectDetection"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        mc:Ignorable="d"
+        Title="WPF Object Detection" Height="512" Width="1024">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="270"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
+            <Image Name="imgViewport" Width="auto" Height="auto" Margin="4,4,8,4"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="0">
+            <StackPanel Orientation="Vertical">
+                <TextBox x:Name="ImagePathTextBox"
+                    Margin="0,4,8,0" IsEnabled="False"/>
+                <Button
+                    Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                    Width="140" Margin="0,12,8,0" HorizontalAlignment="Right"
+                    Content="Load Image.." Click="OnLoadImage"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <StackPanel Orientation="Vertical">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="ElapsedTextBlock" Grid.Column="0"
+                        Style="{StaticResource MaterialDesignBodySmallTextBlock}"
+                        Text="Elapsed: "
+                        VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                    <Button Grid.Column="1" HorizontalAlignment="Right"
+                    Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                    Width="140" Margin="0,4,8,0"
+                    Content="Object Detection" Click="OnObjectDetection"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <!--<Border Background="{DynamicResource MaterialDesignBackground}">-->
+                <GroupBox Header="OpenCV Filtering" Margin="0,0,8,8"
+                    Style="{StaticResource MaterialDesignCardGroupBox}"
+                    UseLayoutRounding="True"
+                    materialDesign:ColorZoneAssist.Mode="SecondaryMid">
+                    <StackPanel Orientation="Vertical">
+                        <CheckBox x:Name="FilterBlur"
+                            Content="Blur" Margin="0,2,0,2" Checked="OnFilterChecked" Unchecked="OnFilterChecked"/>
+                        <CheckBox x:Name="FilterGrayscale"
+                            Content="Grayscale" Margin="0,2,0,2" Checked="OnFilterChecked" Unchecked="OnFilterChecked"/>
+                        <CheckBox x:Name="FilterCanny"
+                            Content="Canny" Margin="0,2,0,2" Checked="OnFilterChecked" Unchecked="OnFilterChecked"/>
+                    </StackPanel>
+                </GroupBox>
+            <!--</Border>-->
+        </Grid>
+    </Grid>
+</Window>
