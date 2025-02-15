@@ -1,1 +1,1 @@
-# WpfObjectDetection
+# WPF Object Detection
